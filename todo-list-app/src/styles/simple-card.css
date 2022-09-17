@@ -1,0 +1,16 @@
+.Simple-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #efefef;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.Simple-card .title {
+    font-size: large;
+    font-weight: 600;
+    margin: 0px;
+}
+
