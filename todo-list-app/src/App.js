@@ -1,11 +1,11 @@
-import {Login} from './pages/login'
+import { Login } from './pages/login'
 import { Register } from './pages/register';
 import { ProjectList } from './pages/project-list';
+import { RequireAuth } from './features/users/require-auth.component';
 import {
   BrowserRouter,
   Routes,
-  Route,
-  Link,
+  Route
 } from "react-router-dom";
 import './styles/App.css';
 
@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />            
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<ProjectList />} />
+          <Route path="/" element={<RequireAuth><ProjectList /></RequireAuth>}/>
         </Routes>
       </BrowserRouter>
     </div>
