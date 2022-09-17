@@ -1,6 +1,7 @@
 import { SimpleCard } from '../../ui/simple-card/simple-card.component';
 import { CustomInput } from '../../ui/custom-input/custom-input.component';
 import { CustomButton } from '../../ui/custom-button/custom-button.component';
+import { registerUser } from '../users.service';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
@@ -15,6 +16,8 @@ export const RegisterCard = () => {
 
         const {name, email, password} = document.forms[0]
         console.log(`${name.value} ${email.value} ${password.value}`)
+
+        registerUser(name.value, email.value, password.value)
     }
 
     const onCancel = () => {
