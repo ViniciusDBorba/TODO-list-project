@@ -11,7 +11,7 @@ export const RegisterCard = ({onResponse}) => {
     const navigate = useNavigate()
 
     const isValidEmail = (email) => {
-        return /\S+@\S+\.\S+/.test(email);
+        return /\S+@\S+\.[a-zA-Z]{2,}/.test(email);
     }
 
     const onSubmit = (event) => {
@@ -34,9 +34,7 @@ export const RegisterCard = ({onResponse}) => {
     const onChangeEmail = (value) => {
         if (isValidEmail(value) && invalidEmail) {
             setInvalidEmail(false)
-        } else if (!invalidEmail) {
-            setInvalidEmail(true)
-        }
+        } 
         setEmail(value)
     }
 
