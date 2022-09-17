@@ -23,8 +23,8 @@ export const LoginCard = () => {
     return (
         <SimpleCard title="Login">
             <form onSubmit={onSubmit}>
-                <CustomInput name="email" value={email} setter={setEmail}/>
-                <CustomInput name="password" value={password} setter={setPassword}/>
+                <CustomInput name="email" value={email} setter={setEmail} required/>
+                <CustomInput name="password" value={password} setter={setPassword} secret required/>
                 <div className="form-actions-wrapper">
                     <CustomButton 
                         primary={false}

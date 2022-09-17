@@ -9,15 +9,35 @@ export const RegisterCard = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [invalidEmail, setInvalidEmail] = useState(false)
     const navigate = useNavigate()
+
+    const isValidEmail = (email) => {
+        return /\S+@\S+\.\S+/.test(email);
+    }
 
     const onSubmit = (event) => {
         event.preventDefault()
-
+        
         const {name, email, password} = document.forms[0]
-        console.log(`${name.value} ${email.value} ${password.value}`)
+        
+        if (isValidEmail(email.value)) {
+            setInvalidEmail(false)
+            registerUser(name.value, email.value, password.value).then(res => {
+                navigate("/login")
+            })
+        } else {
+            setInvalidEmail(true)
+        }
+    }
 
-        registerUser(name.value, email.value, password.value)
+    const onChangeEmail = (value) => {
+        if (isValidEmail(value) && invalidEmail) {
+            setInvalidEmail(false)
+        } else if (!invalidEmail) {
+            setInvalidEmail(true)
+        }
+        setEmail(value)
     }
 
     const onCancel = () => {
@@ -27,9 +47,10 @@ export const RegisterCard = () => {
     return (
         <SimpleCard title="Register">
             <form onSubmit={onSubmit}>
-                <CustomInput name="name" value={name} setter={setName}/>
-                <CustomInput name="email" value={email} setter={setEmail}/>
-                <CustomInput name="password" value={password} setter={setPassword}/>
+                <CustomInput name="name" value={name} setter={setName} required/>
+                <CustomInput name="email" value={email} setter={onChangeEmail} required/>
+                {invalidEmail ? <p className='input-error-message'>Invalid email</p> : ""}
+                <CustomInput name="password" value={password} setter={setPassword} secret required/>
                 <div className="form-actions-wrapper">
                     <CustomButton 
                         primary={false}

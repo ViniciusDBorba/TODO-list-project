@@ -1,23 +1,26 @@
-var express = require('express');
-var service = require('../services/user-service')
-var router = express.Router();
+const express = require('express');
+const service = require('../services/user-service')
+const router = express.Router();
+const { body, validationResult } = require('express-validator');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   res.send('respond with a resource');
 });
 
-router.post('/login', function(req, res, next) {
+router.post('/login', (req, res, next) => {
   res.send('respond with a resource');
 });
 
-router.post('/register', (req, res, next) => {
+router.post('/register', body('email').isEmail(), (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({errors: errors.array()})
+  }
 
-  console.log(req.body)
-  service.saveUser(req.body).then(savedEmail => {
+  service.createUser(req.body)
+  .then(savedEmail => {
     res.send(`User with email ${savedEmail} registered`)
   })
-  
 })
 
 module.exports = router;
