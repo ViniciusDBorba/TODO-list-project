@@ -1,5 +1,6 @@
 import {Login} from './pages/login'
-import './App.css';
+import { Register } from './pages/register';
+import './styles/App.css';
 
 function App() {
   return (

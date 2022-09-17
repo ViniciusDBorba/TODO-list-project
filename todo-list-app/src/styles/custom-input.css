@@ -5,5 +5,6 @@
 }
 
 .input-group label {
+    text-transform: capitalize;
     margin-bottom: 5px;
 }
