@@ -7,3 +7,14 @@
   margin: 0;
   color: red;
 }
+
+
+.simple-title {
+  font-size: large;
+  font-weight: 600;
+  margin: 0px;
+}
+
+.simple-text {
+  font-size: medium;
+}

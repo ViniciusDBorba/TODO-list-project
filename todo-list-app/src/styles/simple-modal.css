@@ -1,0 +1,31 @@
+.Simple-modal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+}
+
+.Simple-modal .modal-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.651);
+    z-index: 0;
+}
+
+.Simple-modal .modal {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.modal input {
+    align-self: center;
+    justify-self: center;
+}

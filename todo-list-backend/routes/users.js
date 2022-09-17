@@ -14,7 +14,7 @@ router.post('/login', (req, res, next) => {
 router.post('/register', body('email').isEmail(), (req, res, next) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    return res.status(400).json({errors: errors.array()})
+    return res.status(400).send("Invalid email!")
   }
 
   service.createUser(req.body)

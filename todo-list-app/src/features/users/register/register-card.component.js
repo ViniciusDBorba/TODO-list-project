@@ -5,10 +5,8 @@ import { registerUser } from '../users.service';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
-export const RegisterCard = () => {
-    const [name, setName] = useState("")
+export const RegisterCard = ({onResponse}) => {
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
     const [invalidEmail, setInvalidEmail] = useState(false)
     const navigate = useNavigate()
 
@@ -24,7 +22,9 @@ export const RegisterCard = () => {
         if (isValidEmail(email.value)) {
             setInvalidEmail(false)
             registerUser(name.value, email.value, password.value).then(res => {
-                navigate("/login")
+                onResponse(res)
+            }).catch(err => {
+                onResponse(err.response)
             })
         } else {
             setInvalidEmail(true)
@@ -47,10 +47,10 @@ export const RegisterCard = () => {
     return (
         <SimpleCard title="Register">
             <form onSubmit={onSubmit}>
-                <CustomInput name="name" value={name} setter={setName} required/>
+                <CustomInput name="name" required/>
                 <CustomInput name="email" value={email} setter={onChangeEmail} required/>
                 {invalidEmail ? <p className='input-error-message'>Invalid email</p> : ""}
-                <CustomInput name="password" value={password} setter={setPassword} secret required/>
+                <CustomInput name="password" secret required/>
                 <div className="form-actions-wrapper">
                     <CustomButton 
                         primary={false}
