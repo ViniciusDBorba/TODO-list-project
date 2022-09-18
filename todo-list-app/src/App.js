@@ -1,6 +1,6 @@
 import { Login } from './pages/login'
 import { Register } from './pages/register';
-import { ProjectList } from './pages/project-list';
+import { Main } from './pages/main';
 import { RequireAuth } from './features/users/auth/require-auth.component';
 import {
   BrowserRouter,
@@ -19,7 +19,7 @@ function App() {
             <Route path="/login" element={<Login />} />            
             <Route path="/register" element={<Register />} />
             <Route element={<RequireAuth/>}>
-              <Route path="/" element={<ProjectList />}/>
+              <Route path="/" element={<Main />}/>
             </Route>
           </Routes>
         </BrowserRouter>

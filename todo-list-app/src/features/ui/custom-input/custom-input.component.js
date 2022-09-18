@@ -1,6 +1,6 @@
 import "../../../styles/custom-input.css"
 
-export const CustomInput = ({name, value, setter, errorMessage = "", secret = false, required = false}) => {
+export const CustomInput = ({name, value, setter, errorMessage = "", secret = false, required = false, className = ""}) => {
 
     const renderErrorMessage = () => {
         if (errorMessage) {
@@ -11,7 +11,9 @@ export const CustomInput = ({name, value, setter, errorMessage = "", secret = fa
     return (
         <div className="input-group">
             <label htmlFor={name}>{name}</label>    
-            <input type={secret ? "password" : "text"} 
+            <input 
+                type={secret ? "password" : "text"} 
+                className={`custom-input ${className}`}
                 id={name} 
                 name={name}
                 data-testid={name}
