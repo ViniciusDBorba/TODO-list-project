@@ -20,7 +20,7 @@ export const RegisterCard = ({onResponse}) => {
         if (user) {
             navigate('/')
         }
-    }, [])
+    }, [navigate, user])
 
     const isValueValid = (value) => {
         return value && value.trim()

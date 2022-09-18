@@ -15,15 +15,21 @@ export const AuthProvider = ({children}) => {
     const [initialized, setInitialized] = useState(false)
     const [user, setUser] = useState(null)
 
+    const handleGetUserResponse = (res) => {
+        if (res.status === 200) {
+            setUser(res.data)
+        } else {
+            setUser(null)
+        }
+
+        setInitialized(true)
+    }
+
     useEffect(() => {
         getUser().then(res => {
-            if (res.status === 200) {
-                setUser(res.data)
-            } else {
-                setUser(null)
-            }
-
-            setInitialized(true)
+            handleGetUserResponse(res)
+        }).catch(e => {
+            handleGetUserResponse(e.response)
         })
     }, [])
 

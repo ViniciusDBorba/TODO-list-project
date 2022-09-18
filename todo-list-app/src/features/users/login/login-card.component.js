@@ -13,10 +13,11 @@ export const LoginCard = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        console.log(user)
         if (user) {
             navigate('/')
         }
-    }, [])
+    }, [user, navigate])
 
     const updateUserAndLogin = () => {
         getUser(email).then(res => {
