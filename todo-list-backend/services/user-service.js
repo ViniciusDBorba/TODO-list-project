@@ -24,6 +24,24 @@ const createUser = (user) => {
     })
 }
 
+const getUser = (email) => {
+    return model.getUser(email)
+}
+
+const canUserLogin = (email, password) => {
+    return new Promise((resolve, reject) => {
+        const user = model.getUser(email)
+
+        if (user) {
+            resolve(user.password === password)
+        } else {
+            reject('Can not find any user with this email')
+        }
+    })
+}
+
 module.exports = {
-    createUser
+    createUser,
+    getUser,
+    canUserLogin
 }

@@ -1,19 +1,34 @@
 import { SimpleCard } from '../../ui/simple-card/simple-card.component';
 import { CustomInput } from '../../ui/custom-input/custom-input.component';
 import { CustomButton } from '../../ui/custom-button/custom-button.component';
+import { login, getUser } from '../users.service';
+import { useAuth } from '../auth/auth.context';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
 export const LoginCard = () => {
+    const { setUser } = useAuth()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
+    const updateUserAndLogin = () => {
+        getUser(email).then(res => {
+            if (res.status === 200) {
+                setUser(res.data)
+                navigate('/')
+            }
+        })
+    }
+
     const onSubmit = (event) => {
         event.preventDefault()
 
-        const {email, password} = document.forms[0]
-        console.log(`${email.value} ${password.value}`)
+        login(email, password).then(res => {
+            if (res.status === 200) {
+                updateUserAndLogin()
+            }
+        })
     }
 
     const onClickRegister = () => {

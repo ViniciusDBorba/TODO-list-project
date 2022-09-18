@@ -1,4 +1,8 @@
-var users_collection = {}
+var users_collection = {'admin':{
+    name:'admin',
+    email:'admin',
+    password: 'admin'
+}}
 
 const saveUser = (user) => {
     return new Promise((resolve, reject) => {

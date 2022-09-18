@@ -14,17 +14,18 @@ export default class Api {
         this.client = axios.create({
             baseURL: this.api_url,
             timeout: 31000,
-            headers: headers
+            headers: headers,
+            withCredentials: true
           });
       
           return this.client;
     }
 
     get = (path, params) => {
-        return this.init().get(path, params)
+        return this.init().get(path, {params, withCredentials: true})
     }
 
     post = (path, data) => {
-        return this.init().post(path, data)
+        return this.init().post(path, data, {withCredentials: true})
     }
 }
