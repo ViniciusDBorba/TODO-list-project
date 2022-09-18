@@ -4,7 +4,7 @@ import { CustomButton } from '../custom-button/custom-button.component';
 
 export const SimpleModal = ({title, message, action, onAction}) => {
     return (
-        <div className="Simple-modal">
+        <div className="Simple-modal" data-testid="simple-modal">
             <div className='modal-background'/>
             <div className='modal'>
                 <p className="simple-title">{title}</p>

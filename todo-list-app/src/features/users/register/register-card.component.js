@@ -6,22 +6,57 @@ import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
 export const RegisterCard = ({onResponse}) => {
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [invalidName, setInvalidName] = useState(false)
     const [invalidEmail, setInvalidEmail] = useState(false)
+    const [invalidPassword, setInvalidPassword] = useState(false)
     const navigate = useNavigate()
 
+    const isValueValid = (value) => {
+        return value && value.trim()
+    }
+    
+    const formIsComplete = () => {
+        let formIsComplete = true
+
+        if (!isValueValid(name)) {
+            setInvalidName(true)
+            formIsComplete = false
+        } else {
+            setInvalidName(false)
+        }
+
+        if (!isValueValid(email)) {
+            setInvalidEmail(true)
+            formIsComplete = false
+        }
+
+        if (!isValueValid(password)) {
+            setInvalidPassword(true)
+            formIsComplete = false
+        } else {
+            setInvalidPassword(false)
+        }
+
+        return formIsComplete
+    }
+
     const isValidEmail = (email) => {
-        return /\S+@\S+\.[a-zA-Z]{2,}/.test(email);
+        return /\S+@\S+\.\S{2,}/.test(email);
     }
 
     const onSubmit = (event) => {
         event.preventDefault()
-        
-        const {name, email, password} = document.forms[0]
-        
-        if (isValidEmail(email.value)) {
+
+        if (!formIsComplete()) {
+            return;
+        }
+                
+        if (isValidEmail(email)) {
             setInvalidEmail(false)
-            registerUser(name.value, email.value, password.value).then(res => {
+            registerUser(name, email, password).then(res => {
                 onResponse(res)
             }).catch(err => {
                 onResponse(err.response)
@@ -31,6 +66,13 @@ export const RegisterCard = ({onResponse}) => {
         }
     }
 
+    const onChangeName = (value) => {
+        if (invalidName) {
+            setInvalidName(false)
+        } 
+        setName(value)
+    }
+
     const onChangeEmail = (value) => {
         if (isValidEmail(value) && invalidEmail) {
             setInvalidEmail(false)
@@ -38,24 +80,32 @@ export const RegisterCard = ({onResponse}) => {
         setEmail(value)
     }
 
+    const onChangePassword = (value) => {
+        if (invalidPassword) {
+            setInvalidPassword(false)
+        } 
+        setPassword(value)
+    }
+
     const onCancel = () => {
         navigate("/login")
     }
 
     return (
-        <SimpleCard title="Register">
+        <SimpleCard title="Register" testid="register-card">
             <form onSubmit={onSubmit}>
-                <CustomInput name="name" required/>
-                <CustomInput name="email" value={email} setter={onChangeEmail} required/>
-                {invalidEmail ? <p className='input-error-message'>Invalid email</p> : ""}
-                <CustomInput name="password" secret required/>
+                <CustomInput name="name" value={name} setter={onChangeName} errorMessage={invalidName ? "Invalid name" : ""} required/>
+                <CustomInput name="email" value={email} setter={onChangeEmail} errorMessage={invalidEmail ? "Invalid email" : ""} required/>
+                <CustomInput name="password" value={password} setter={onChangePassword} errorMessage={invalidPassword ? "Invalid password" : ""} secret required/>
                 <div className="form-actions-wrapper">
                     <CustomButton 
+                        testid="cancelBt"
                         primary={false}
                         text="Cancel"
                         onClick={onCancel}
                     />
                     <CustomButton
+                        testid="registerBt"
                         text="Submit"
                     />
                 </div>

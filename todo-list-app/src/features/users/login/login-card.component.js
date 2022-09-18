@@ -21,7 +21,7 @@ export const LoginCard = () => {
     }
 
     return (
-        <SimpleCard title="Login">
+        <SimpleCard title="Login" testid="login-card">
             <form onSubmit={onSubmit}>
                 <CustomInput name="email" value={email} setter={setEmail} required/>
                 <CustomInput name="password" value={password} setter={setPassword} secret required/>
@@ -30,8 +30,10 @@ export const LoginCard = () => {
                         primary={false}
                         text="Register"
                         onClick={onClickRegister}
+                        testid="registerBt"
                     />
                     <CustomButton
+                        testid="loginBt"
                         text="Submit"
                     />
                 </div>
