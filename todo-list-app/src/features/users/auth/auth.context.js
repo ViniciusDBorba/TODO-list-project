@@ -26,12 +26,15 @@ export const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
+        if (user){
+            return
+        }
         getUser().then(res => {
             handleGetUserResponse(res)
         }).catch(e => {
             handleGetUserResponse(e.response)
         })
-    }, [])
+    }, [user])
 
     return (
         <AuthContext.Provider value={{user, setUser}}>

@@ -25,7 +25,6 @@ router.post('/login', (req, res, next) => {
   service.canUserLogin(email, password).then(async can => {
     if (can) {
       await sessionService.saveSession(email, req.session)
-      req.session.save()
       res.send('Logged in')
     } else {
       res.status(401).send('Wrong password')
