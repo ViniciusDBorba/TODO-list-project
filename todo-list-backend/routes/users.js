@@ -1,6 +1,6 @@
 const express = require('express');
-const service = require('../services/user-service')
-const sessionService = require('../services/session-service')
+const service = require('../services/user.service')
+const sessionService = require('../services/session.service')
 const router = express.Router();
 const { body } = require('express-validator');
 
@@ -12,6 +12,14 @@ router.get('/', (req, res, next) => {
   } else {
     res.status(404).send(`User with email ${session.userid} not founded`)
   }
+});
+
+router.get('/logout', (req, res, next) => {
+  const session = req.session
+  const user = session.userid
+  sessionService.removeSession(session.userid)
+  session.destroy()
+  res.send(`User ${user} logged out`)
 });
 
 router.post('/login', (req, res, next) => {

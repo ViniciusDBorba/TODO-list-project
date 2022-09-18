@@ -20,4 +20,5 @@ describe('User model', () => {
         })
         expect(getUser(user.email)).toBe(undefined)
     })
+    
 })

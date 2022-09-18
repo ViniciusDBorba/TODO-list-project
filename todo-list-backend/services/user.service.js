@@ -35,7 +35,7 @@ const canUserLogin = (email, password) => {
         if (user) {
             resolve(user.password === password)
         } else {
-            reject('Can not find any user with this email')
+            reject('Could not find any user with this email')
         }
     })
 }

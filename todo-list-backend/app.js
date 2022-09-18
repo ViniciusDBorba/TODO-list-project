@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const sessionService = require('./services/session-service')
+const sessionService = require('./services/session.service')
 
 const app = express();
 app.use(logger('dev'));
