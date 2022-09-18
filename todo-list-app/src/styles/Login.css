@@ -21,3 +21,13 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.login-error-message {
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    color: red;
+    padding-top: 10px;
+    margin: 0;
+    max-width: fit-content;
+}

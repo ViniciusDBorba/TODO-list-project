@@ -1,6 +1,6 @@
 import { fireEvent, getByTestId, render, screen, waitFor } from '@testing-library/react';
 import { Register } from './register';
-import {registerUser, getUser} from '../features/users/users.service';
+import {registerUser } from '../features/users/users.service';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../features/users/auth/auth.context';
 
