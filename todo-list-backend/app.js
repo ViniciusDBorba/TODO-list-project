@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const sessionService = require('./services/session-service')
 
 const app = express();
 app.use(logger('dev'));
@@ -30,10 +31,21 @@ app.use(sessions({
 }));
 
 app.use((req, res, next) => {
+    console.log(req.path)
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,content-type, Accept, Authorization');
     res.setHeader('Access-Control-Allow-Credentials', true);
+    if (req.path.includes('login') || req.path.includes('register')) {
+        next();
+        return
+    } 
+
+    if (!sessionService.sessionExists(req.session.userid)) {
+        res.status(401).send('Unauthorized')
+        return
+    }
+
     next();
 });
 

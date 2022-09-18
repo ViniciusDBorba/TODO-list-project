@@ -4,20 +4,14 @@ const sessionService = require('../services/session-service')
 const router = express.Router();
 const { body } = require('express-validator');
 
-router.get('/', (req, res, next) => {
+router.get('/', (req, res, next) => {  
   const session = req.session
-  if (!sessionService.sessionExists(session.userid)) {
-    res.status(401).send(`Unauthorized`)
-    return
-  }
-  
   const user = service.getUser(session.userid)
   if (user) {
     res.send(user);
   } else {
     res.status(404).send(`User with email ${session.userid} not founded`)
   }
-  
 });
 
 router.post('/login', (req, res, next) => {
@@ -27,7 +21,7 @@ router.post('/login', (req, res, next) => {
       await sessionService.saveSession(email, req.session)
       res.send('Logged in')
     } else {
-      res.status(401).send('Wrong password')
+      res.status(400).send('Wrong password')
     }
   }).catch(e => {
     res.status(404).send(e)
