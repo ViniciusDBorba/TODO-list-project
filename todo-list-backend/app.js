@@ -15,8 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_COOKIE_SECRET));
 app.use(express.static(path.join(__dirname, 'public')));
-const oneDay = 1000 * 60 * 60 * 24;
 app.set('trust proxy', 1)
+
+const oneDay = 1000 * 60 * 60 * 24;
 app.use(sessions({
     name: "todo-project-session",
     secret: process.env.SESSION_COOKIE_SECRET,
@@ -29,12 +30,11 @@ app.use(sessions({
         sameSite: true
     }
 }));
-
 app.use((req, res, next) => {
     console.log(req.path)
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ALLOW_ORIGIN);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,content-type, Accept, Authorization');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type, Accept, Authorization');
     res.setHeader('Access-Control-Allow-Credentials', true);
     if (req.path.includes('login') || req.path.includes('register')) {
         next();
