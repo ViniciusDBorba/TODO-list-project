@@ -11,12 +11,11 @@ router.get('/', (req, res, next) => {
     return
   }
   
-  const {email} = req.query
-  const user = service.getUser(email)
+  const user = service.getUser(session.userid)
   if (user) {
     res.send(user);
   } else {
-    res.status(404).send(`User with email ${email} not founded`)
+    res.status(404).send(`User with email ${session.userid} not founded`)
   }
   
 });

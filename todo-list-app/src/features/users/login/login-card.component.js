@@ -4,16 +4,23 @@ import { CustomButton } from '../../ui/custom-button/custom-button.component';
 import { login, getUser } from '../users.service';
 import { useAuth } from '../auth/auth.context';
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const LoginCard = () => {
-    const { setUser } = useAuth()
+    const { user, setUser } = useAuth()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [])
+
     const updateUserAndLogin = () => {
         getUser(email).then(res => {
+            console.log(res)
             if (res.status === 200) {
                 setUser(res.data)
                 navigate('/')

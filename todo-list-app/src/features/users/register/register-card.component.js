@@ -1,11 +1,13 @@
 import { SimpleCard } from '../../ui/simple-card/simple-card.component';
 import { CustomInput } from '../../ui/custom-input/custom-input.component';
 import { CustomButton } from '../../ui/custom-button/custom-button.component';
+import { useAuth } from '../auth/auth.context';
 import { registerUser } from '../users.service';
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const RegisterCard = ({onResponse}) => {
+    const { user } = useAuth()
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -13,6 +15,12 @@ export const RegisterCard = ({onResponse}) => {
     const [invalidEmail, setInvalidEmail] = useState(false)
     const [invalidPassword, setInvalidPassword] = useState(false)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [])
 
     const isValueValid = (value) => {
         return value && value.trim()

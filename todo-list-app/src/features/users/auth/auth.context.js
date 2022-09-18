@@ -1,4 +1,5 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+import { getUser } from "../users.service";
 
 const AuthContext = createContext(null)
 
@@ -11,12 +12,27 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({children}) => {
+    const [initialized, setInitialized] = useState(false)
     const [user, setUser] = useState(null)
+
+    useEffect(() => {
+        getUser().then(res => {
+            if (res.status === 200) {
+                setUser(res.data)
+            } else {
+                setUser(null)
+            }
+
+            setInitialized(true)
+        })
+    }, [])
 
     return (
         <AuthContext.Provider value={{user, setUser}}>
-            {children}
+            {initialized ? children : ""}
         </AuthContext.Provider>
     )
 }
+
+
 

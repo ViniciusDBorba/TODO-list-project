@@ -5,8 +5,8 @@ export const registerUser = (name, email, password) => {
     return api.post("/register", {name, email, password})
 }
 
-export const getUser = (email) => {
-    return api.get("/", {email})
+export const getUser = () => {
+    return api.get("/")
 }
 
 export const login = (email, password) => {
