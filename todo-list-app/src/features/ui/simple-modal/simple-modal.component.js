@@ -9,7 +9,7 @@ export const SimpleModal = ({title, message, action, onAction}) => {
             <div className='modal'>
                 <p className="simple-title">{title}</p>
                 <p className="simple-text">{message}</p>
-                <CustomButton primary={false} text={action} onClick={onAction}/>
+                <CustomButton testid="simple-modal-action" primary={false} text={action} onClick={onAction}/>
             </div>
         </div>
       );

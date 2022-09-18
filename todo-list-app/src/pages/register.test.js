@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, getByTestId, render, screen, waitFor } from '@testing-library/react';
 import {registerUser} from '../features/users/users.service';
 import App from '../App'
 
@@ -32,6 +32,37 @@ describe('Register Page', () => {
     
         await waitFor(() => screen.getByTestId('simple-modal'))
         expect(registerUser).toHaveBeenCalledTimes(1)
+    })
+
+    it('Should show modal on submit user to api', async () => {
+        registerUser.mockReturnValue(Promise.resolve(({status: 200, data:"Teste"})))
+        fillRegisterForm('Teste', 'email@email.com', 'TestePassword')
+        clickButton("registerBt")
+    
+        const modal = await waitFor(() => screen.getByTestId('simple-modal'))
+        expect(modal).toBeInTheDocument()
+    })
+
+    it('Should navigate to login page when click on modal action if register response status is 200', async () => {
+        registerUser.mockReturnValue(Promise.resolve(({status: 200, data:"Teste"})))
+        fillRegisterForm('Teste', 'email@email.com', 'TestePassword')
+        clickButton("registerBt")
+    
+        const modalAction = await waitFor(() => screen.getByTestId('simple-modal-action'))
+        fireEvent.click(modalAction)
+        expect(screen.getByTestId("login-card")).toBeInTheDocument()
+    })
+
+    it('Should close modal when click on modal action if register response status is diferent than 200', async () => {
+        registerUser.mockReturnValue(Promise.resolve(({status: 400, data:"Teste"})))
+        fillRegisterForm('Teste', 'email@email.com', 'TestePassword')
+        clickButton("registerBt")
+    
+        const modal = await waitFor(() => screen.getByTestId('simple-modal'))
+        const modalAction = getByTestId(modal, 'simple-modal-action')
+        fireEvent.click(modalAction)
+        expect(modal).not.toBeInTheDocument()
+        expect(screen.getByTestId('register-card')).toBeInTheDocument()
     })
 
     it('Should not submit user to api if name form input is empty', async () => {
