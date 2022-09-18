@@ -101,7 +101,7 @@ export const RegisterCard = ({onResponse}) => {
 
     return (
         <SimpleCard title="Register" testid="register-card">
-            <form onSubmit={onSubmit}>
+            <form data-testid="register-form" onSubmit={onSubmit}>
                 <CustomInput name="name" value={name} setter={onChangeName} errorMessage={invalidName ? "Invalid name" : ""} required/>
                 <CustomInput name="email" value={email} setter={onChangeEmail} errorMessage={invalidEmail ? "Invalid email" : ""} required/>
                 <CustomInput name="password" value={password} setter={onChangePassword} errorMessage={invalidPassword ? "Invalid password" : ""} secret required/>

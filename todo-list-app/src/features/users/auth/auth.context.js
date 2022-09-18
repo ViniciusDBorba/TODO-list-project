@@ -3,13 +3,7 @@ import { getUser } from "../users.service";
 
 const AuthContext = createContext(null)
 
-export const useAuth = () => {
-    const authCtx = useContext(AuthContext);
-    if (!authCtx) {
-        throw new Error("Component beyond AuthContext!")
-    }
-    return authCtx;
-}
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({children}) => {
     const [initialized, setInitialized] = useState(false)
@@ -26,15 +20,12 @@ export const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
-        if (user){
-            return
-        }
         getUser().then(res => {
             handleGetUserResponse(res)
         }).catch(e => {
             handleGetUserResponse(e.response)
         })
-    }, [user])
+    }, [])
 
     return (
         <AuthContext.Provider value={{user, setUser}}>
