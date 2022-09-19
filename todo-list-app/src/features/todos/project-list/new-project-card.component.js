@@ -17,6 +17,11 @@ export const NewProjectCard = ({onAddProject}) => {
         })
     }
 
+    const onChangeProjectName = (value) => {
+        setErrorMessage("")
+        setProjectName(value)
+    }
+
     const renderErrorMessage = () => {
         if (errorMessage) {
             return (<p className='card-error-message' data-testid={`login-error-message`}>{errorMessage}</p>)
@@ -33,7 +38,7 @@ export const NewProjectCard = ({onAddProject}) => {
                 <CustomInput 
                     name="project name" 
                     value={projectName} 
-                    setter={setProjectName} 
+                    setter={onChangeProjectName} 
                     required
                 />
 

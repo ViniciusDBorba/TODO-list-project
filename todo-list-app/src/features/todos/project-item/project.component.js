@@ -8,7 +8,8 @@ import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri"
 export const Project = ({project, deleteProjectEvent}) => {
   const [todoDescription, setTodoDescription] = useState("")
   const [todoList, setTodoList] = useState([])
-
+  const [errorMessage, setErrorMessage] = useState("")
+  
   useEffect(() => {
     setTodoList(project.todos)
   }, [])
@@ -17,6 +18,8 @@ export const Project = ({project, deleteProjectEvent}) => {
     addTodo(todoDescription, project.name).then(res => {
       setTodoDescription("")
       setTodoList(res.data)
+    }).catch(e => {
+      setErrorMessage(e.response.data)
     })
   }
 
@@ -25,6 +28,17 @@ export const Project = ({project, deleteProjectEvent}) => {
       setTodoList(res.data)
     })
   }
+
+  const onChangeTodoDescription = (value) => {
+    setErrorMessage("")
+    setTodoDescription(value)
+  }
+
+  const renderErrorMessage = () => {
+    if (errorMessage) {
+        return (<p className='card-error-message' data-testid={`login-error-message`}>{errorMessage}</p>)
+    }
+}
 
   return (
     <div className="project-item">
@@ -36,6 +50,7 @@ export const Project = ({project, deleteProjectEvent}) => {
         </div>
       </div>
       <div className="project-item-body">
+        {renderErrorMessage()}
         <TodoList 
           title="To Do"
           todoList={todoList.filter(todo => !todo.done)} 
@@ -52,7 +67,7 @@ export const Project = ({project, deleteProjectEvent}) => {
               name={`${project.name} todo description`} 
               needLabel={false}
               value={todoDescription} 
-              setter={setTodoDescription}
+              setter={onChangeTodoDescription}
             />
             <CustomButton testid={`${project.name}-add-todo-button`} text="Add" onClick={onClickAddTodo}/>
         </div>
