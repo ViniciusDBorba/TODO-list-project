@@ -3,8 +3,9 @@ import { CustomButton } from "../../ui/custom-button/custom-button.component";
 import { CustomInput } from "../../ui/custom-input/custom-input.component";
 import { addTodo, updateTodoStatus } from "../project.service";
 import { TodoList } from "./todo-list/todo-list.component";
+import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri"
 
-export const Project = ({project}) => {
+export const Project = ({project, deleteProjectEvent}) => {
   const [todoDescription, setTodoDescription] = useState("")
   const [todoList, setTodoList] = useState([])
 
@@ -29,6 +30,10 @@ export const Project = ({project}) => {
     <div key={project.name} className="project-item">
       <div className="project-item-header">
         <span>{project.name}</span>
+        <div>
+          <RiEdit2Line className="small-margin-right action-icon"/>
+          <RiDeleteBin2Line className="action-icon" onClick={() => deleteProjectEvent(project.name)}/>
+        </div>
       </div>
       <div className="project-item-body">
         <TodoList 

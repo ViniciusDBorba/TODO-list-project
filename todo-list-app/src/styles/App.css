@@ -44,3 +44,11 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
+.small-margin-right {
+  margin-right: 5px;
+}
+
+.action-icon:hover {
+  cursor: pointer;
+}

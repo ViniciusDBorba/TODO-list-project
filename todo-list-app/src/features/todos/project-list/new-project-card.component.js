@@ -12,10 +12,13 @@ export const NewProjectCard = ({onClickAddProject}) => {
     }
 
     return (
-        <SimpleCard testid="add-project-card" title="Create a new project">
+        <SimpleCard 
+            testid="add-project-card"
+            title="Create a new project"
+        >
             <div className='new-project-card-content'>
                 <CustomInput 
-                    name="prject name" 
+                    name="project name" 
                     value={projectName} 
                     setter={setProjectName} 
                     required

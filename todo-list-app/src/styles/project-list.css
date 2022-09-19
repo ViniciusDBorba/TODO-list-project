@@ -35,10 +35,17 @@
     display: flex;
     padding: 5px;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     background-color: #efefef;
 }
+
+.project-item-header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .project-item-body {
     display: flex;
     padding: 10px;

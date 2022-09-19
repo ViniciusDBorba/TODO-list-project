@@ -9,6 +9,10 @@ export const getProjects = () => {
     return api.get("/")
 }
 
+export const deleteProject = (name) => {
+    return api.delete("/deleteProject", {name})
+}
+
 export const addTodo = (todoDescription, projectName) => {
     return api.put("/addTodo", {todoDescription, projectName})
 }

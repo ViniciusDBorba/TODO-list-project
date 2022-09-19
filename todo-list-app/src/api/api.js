@@ -33,4 +33,8 @@ export default class Api {
     put = (path, data) => {
         return this.init().put(path, data)
     }
+
+    delete = (path, params) => {
+        return this.init().delete(path, {params})
+    }
 }

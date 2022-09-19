@@ -23,6 +23,16 @@ router.post('/new', (req, res, next) => {
   })
 });
 
+router.delete('/deleteProject', (req, res, next) => {
+  const { name } = req.query
+  
+  service.deleteProject(name, req.session.userid).then(project => {
+    res.send(project)
+  }).catch(e => {
+    res.status(400).send(e)
+  })
+});
+
 router.put('/addTodo', (req, res, next) => {
   const { todoDescription, projectName } = req.body
   

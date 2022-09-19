@@ -26,6 +26,27 @@ const createProject = (projectName, userid) => {
     })
 }
 
+const deleteProject = (projectName, userid) => {
+    return new Promise(async (resolve, reject) => {
+        if (!projectName || !projectName.trim()) {
+            reject('Project name can not be null or empty')
+            return
+        }
+        
+        if (!projectExists(userid, projectName)) {
+            reject(`Project with name ${projectName} from user ${userid} does not exist`)
+            return
+        }
+
+        model.deleteProject(projectName, userid)
+        .then(projectList => {
+            resolve(projectList)
+        }).catch(e => {
+            reject(e)
+        })
+    })
+}
+
 const projectExists = (userid, projectName) => {
     return model.getProject(projectName, userid) ? true : false
 }
@@ -119,5 +140,6 @@ module.exports = {
     createProject,
     getUserProjects,
     addTodo,
-    updateTodoStatus
+    updateTodoStatus,
+    deleteProject
 }

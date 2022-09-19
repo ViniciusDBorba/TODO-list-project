@@ -33,8 +33,22 @@ const getProject = (projectName, userId) => {
     }
 }
 
+const deleteProject = (projectName, userid) => {
+    return new Promise((resolve, reject) => {
+        const projectList = getUserProjects(userid)
+        projects_collection[userid] = {}
+        projectList.forEach(project => {
+            if (project.name !== projectName) {
+                projects_collection[userid][project.name] = project
+            }
+        })
+        resolve(getUserProjects(userid))
+    })
+}
+
 module.exports = {
     saveProject,
     getUserProjects,
-    getProject
+    getProject,
+    deleteProject
 };
