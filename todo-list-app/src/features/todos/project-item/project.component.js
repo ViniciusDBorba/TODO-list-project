@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CustomButton } from "../../ui/custom-button/custom-button.component";
 import { CustomInput } from "../../ui/custom-input/custom-input.component";
-import { addTodo, updateTodoStatus, deleteTodo } from "../project.service";
+import { addTodo, updateTodoStatus, deleteTodo, updateTodoDescription } from "../project.service";
 import { TodoList } from "./todo-list/todo-list.component";
 import { ProjectItemHeader } from "./project-item-header.component";
 
@@ -29,11 +29,21 @@ export const Project = ({project, deleteProjectEvent, saveNewNameEvent}) => {
     })
   }
 
+  const onSaveNewTodoDescription = (oldTodoDescription, newTodoDescription) => {
+    updateTodoDescription(oldTodoDescription, newTodoDescription, project.name).then(res => {
+      setErrorMessage("")
+      setTodoList(res.data)
+    }).catch(e => {
+      setErrorMessage(e.response.data)
+    })
+  }
+
   const onDeleteTodo = (todoDescription) => {
     deleteTodo(todoDescription, project.name).then(res => {
       setTodoList(res.data)
     })
   }
+
 
   const onChangeTodoDescription = (value) => {
     setErrorMessage("")
@@ -47,7 +57,12 @@ export const Project = ({project, deleteProjectEvent, saveNewNameEvent}) => {
   }
 
   const onSaveAction = (newName) => {
-    saveNewNameEvent(newName, project.name)
+    saveNewNameEvent(newName, project.name).then(() => {
+      setErrorMessage("")
+    })
+    .catch(e => {
+      setErrorMessage(e.response.data)
+    })
   }
 
   return (
@@ -59,12 +74,14 @@ export const Project = ({project, deleteProjectEvent, saveNewNameEvent}) => {
           title="To Do"
           todoList={todoList.filter(todo => !todo.done)} 
           deleteTodoEvent={onDeleteTodo}
+          saveTodoDescriptionEvent={onSaveNewTodoDescription}
           onChangeTodoStatus={onChangeTodoStatus}
         />
         <TodoList 
           title="Done"
           todoList={todoList.filter(todo => todo.done)} 
           deleteTodoEvent={onDeleteTodo}
+          saveTodoDescriptionEvent={onSaveNewTodoDescription}
           onChangeTodoStatus={onChangeTodoStatus}
         />
         <span className="separator" />

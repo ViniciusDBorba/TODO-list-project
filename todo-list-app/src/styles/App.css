@@ -49,6 +49,10 @@
   margin-right: 5px;
 }
 
+.medium-margin-right {
+  margin-right: 10px;
+}
+
 .action-icon:hover {
   cursor: pointer;
 }

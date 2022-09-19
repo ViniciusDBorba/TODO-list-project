@@ -31,10 +31,8 @@ export const ProjectList = () => {
     }
 
     const onSaveNewName = (newName, oldName) => {
-        updateProjectName(oldName, newName).then(res => {
+        return updateProjectName(oldName, newName).then(res => {
             setProjectList(res.data)
-        }).catch(e => {
-            console.log(e)
         })
     }
 

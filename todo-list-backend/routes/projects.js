@@ -53,6 +53,16 @@ router.put('/updateTodoStatus', (req, res, next) => {
   })
 });
 
+router.put('/updateTodoDescription', (req, res, next) => {
+  const { oldTodoDescription, newTodoDescription, projectName } = req.body
+  
+  service.updateTodoDescription(oldTodoDescription, newTodoDescription, projectName, req.session.userid).then(projectTodoList => {
+    res.send(projectTodoList)
+  }).catch(e => {
+    res.status(400).send(e)
+  })
+});
+
 router.delete('/deleteTodo', (req, res, next) => {
   const { todoDescription, projectName } = req.query
   

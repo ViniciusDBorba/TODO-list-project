@@ -116,7 +116,7 @@ const updateTodoStatus = (ended, todoDescription, projectName, userid) => {
 
         const findedTodos = project.todos.filter(t => t.description === todoDescription)
 
-        if (!findedTodos && !findedTodos.length > 0) {
+        if (!findedTodos || !findedTodos.length > 0) {
             reject(`Todo with description ${todoDescription} does not exist`)
             return
         }
@@ -124,6 +124,55 @@ const updateTodoStatus = (ended, todoDescription, projectName, userid) => {
         project.todos = project.todos.map(todo => {
             if (todo.description === todoDescription) {
                 return {...todo, done: ended}
+            }
+
+            return todo
+        })
+        
+        model.saveProject(project, userid)
+        .then(project => {
+            resolve(project.todos)
+        }).catch(e => {
+            reject(e)
+        })
+    })
+}
+const updateTodoDescription = (oldTodoDescription, newTodoDescription, projectName, userid) => {
+    return new Promise(async (resolve, reject) => {
+        if (!oldTodoDescription || !oldTodoDescription.trim()) {
+            reject('Old todo description can not be null or empty')
+            return
+        }
+
+        if (!newTodoDescription || !newTodoDescription.trim()) {
+            reject('New todo description can not be null or empty')
+            return
+        }
+        
+        if (!projectExists(userid, projectName)) {
+            reject(`Project with name ${projectName} from user ${userid} does not exist`)
+            return
+        }
+
+        const project = model.getProject(projectName, userid)
+
+        let findedTodos = project.todos.filter(t => t.description === oldTodoDescription)
+
+        if (!findedTodos || !findedTodos.length > 0) {
+            reject(`Todo with description ${oldTodoDescription} does not exist`)
+            return
+        }
+
+        findedTodos = project.todos.filter(t => t.description === newTodoDescription)
+
+        if (findedTodos && findedTodos.length > 0) {
+            reject(`Todo with description ${newTodoDescription} already exist`)
+            return
+        }
+
+        project.todos = project.todos.map(todo => {
+            if (todo.description === oldTodoDescription) {
+                return {...todo, description: newTodoDescription}
             }
 
             return todo
@@ -207,5 +256,6 @@ module.exports = {
     updateTodoStatus,
     deleteProject,
     updateProjectName,
-    deleteProjectTodo
+    deleteProjectTodo,
+    updateTodoDescription
 }

@@ -1,6 +1,6 @@
 import { TodoItem } from "./todo-item.component";
 
-export const TodoList = ({title, todoList, deleteTodoEvent, onChangeTodoStatus}) => {
+export const TodoList = ({title, todoList, deleteTodoEvent, saveTodoDescriptionEvent, onChangeTodoStatus}) => {
   return (
     <div>
       <span className="simple-title">{title}</span>
@@ -12,6 +12,7 @@ export const TodoList = ({title, todoList, deleteTodoEvent, onChangeTodoStatus})
                 todo={todo}
                 deleteEvent={deleteTodoEvent}
                 onChangeStatus={onChangeTodoStatus} 
+                saveTodoDescriptionEvent={saveTodoDescriptionEvent}
                 className={`${todo.done ? "done" : ""}`}
               />
             ))
