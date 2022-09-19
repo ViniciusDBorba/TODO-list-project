@@ -3,9 +3,9 @@ import { CustomButton } from "../../ui/custom-button/custom-button.component";
 import { CustomInput } from "../../ui/custom-input/custom-input.component";
 import { addTodo, updateTodoStatus } from "../project.service";
 import { TodoList } from "./todo-list/todo-list.component";
-import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri"
+import { ProjectItemHeader } from "./project-item-header.component";
 
-export const Project = ({project, deleteProjectEvent}) => {
+export const Project = ({project, deleteProjectEvent, saveNewNameEvent}) => {
   const [todoDescription, setTodoDescription] = useState("")
   const [todoList, setTodoList] = useState([])
   const [errorMessage, setErrorMessage] = useState("")
@@ -38,17 +38,15 @@ export const Project = ({project, deleteProjectEvent}) => {
     if (errorMessage) {
         return (<p className='card-error-message' data-testid={`login-error-message`}>{errorMessage}</p>)
     }
-}
+  }
+
+  const onSaveAction = (newName) => {
+    saveNewNameEvent(newName, project.name)
+  }
 
   return (
     <div className="project-item">
-      <div className="project-item-header">
-        <span>{project.name}</span>
-        <div>
-          <RiEdit2Line className="small-margin-right action-icon"/>
-          <RiDeleteBin2Line className="action-icon" onClick={() => deleteProjectEvent(project.name)}/>
-        </div>
-      </div>
+      <ProjectItemHeader projectName={project.name} saveAction={onSaveAction} deleteProjectEvent={deleteProjectEvent}/>
       <div className="project-item-body">
         {renderErrorMessage()}
         <TodoList 

@@ -14,10 +14,22 @@ const saveProject = (project, userid) => {
     })
 }
 
+const updateProject = (oldProjectName, newProject, userid) => {
+    return new Promise( async (resolve, reject) => {
+        if (!newProject) {
+            reject('Null or empty project')
+            return
+        }
+        await deleteProject(oldProjectName, userid)
+        projects_collection[userid][newProject.name] = newProject
+        resolve(true)
+    })
+}
+
 const getUserProjects = (userid) => {
     const project = projects_collection[userid]
     if (project) {
-        return Object.values(projects_collection[userid])
+        return Object.values(project)
     } else {
         return null
     }
@@ -36,13 +48,15 @@ const getProject = (projectName, userId) => {
 const deleteProject = (projectName, userid) => {
     return new Promise((resolve, reject) => {
         const projectList = getUserProjects(userid)
+        
         projects_collection[userid] = {}
         projectList.forEach(project => {
             if (project.name !== projectName) {
                 projects_collection[userid][project.name] = project
             }
         })
-        resolve(getUserProjects(userid))
+        
+        resolve(true)
     })
 }
 
@@ -50,5 +64,6 @@ module.exports = {
     saveProject,
     getUserProjects,
     getProject,
-    deleteProject
+    deleteProject,
+    updateProject
 };

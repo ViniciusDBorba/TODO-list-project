@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NewProjectCard } from './new-project-card.component';
 import { Project } from '../project-item/project.component';
-import { getProjects, deleteProject } from '../project.service';
+import { getProjects, deleteProject, updateProjectName } from '../project.service';
 import '../../../styles/project-list.css'
 
 export const ProjectList = () => {
@@ -30,6 +30,14 @@ export const ProjectList = () => {
         })
     }
 
+    const onSaveNewName = (newName, oldName) => {
+        updateProjectName(oldName, newName).then(res => {
+            setProjectList(res.data)
+        }).catch(e => {
+            console.log(e)
+        })
+    }
+
     return (
         <div className='project-list'>
             {projectList.map(project => (
@@ -37,6 +45,7 @@ export const ProjectList = () => {
                     key={project.name}
                     project={project} 
                     deleteProjectEvent={onDeleteProject}
+                    saveNewNameEvent={onSaveNewName}
                 />
             ))}
             <NewProjectCard onAddProject={onAddProject}/>

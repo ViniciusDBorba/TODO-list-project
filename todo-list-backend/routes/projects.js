@@ -26,8 +26,8 @@ router.post('/new', (req, res, next) => {
 router.delete('/deleteProject', (req, res, next) => {
   const { name } = req.query
   
-  service.deleteProject(name, req.session.userid).then(project => {
-    res.send(project)
+  service.deleteProject(name, req.session.userid).then(projectList => {
+    res.send(projectList)
   }).catch(e => {
     res.status(400).send(e)
   })
@@ -48,6 +48,16 @@ router.put('/updateTodoStatus', (req, res, next) => {
   
   service.updateTodoStatus(ended, todoDescription, projectName, req.session.userid).then(projectTodoList => {
     res.send(projectTodoList)
+  }).catch(e => {
+    res.status(400).send(e)
+  })
+});
+
+router.put('/updateProjectName', (req, res, next) => {
+  const { oldName, newName } = req.body
+  
+  service.updateProjectName(oldName, newName, req.session.userid).then(projectList => {
+    res.send(projectList)
   }).catch(e => {
     res.status(400).send(e)
   })

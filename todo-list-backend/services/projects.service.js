@@ -39,8 +39,10 @@ const deleteProject = (projectName, userid) => {
         }
 
         model.deleteProject(projectName, userid)
-        .then(projectList => {
-            resolve(projectList)
+        .then(deleted => {
+            if (deleted) {
+                resolve(model.getUserProjects(userid))
+            }
         }).catch(e => {
             reject(e)
         })
@@ -136,10 +138,49 @@ const updateTodoStatus = (ended, todoDescription, projectName, userid) => {
     })
 }
 
+const updateProjectName = (oldName, newName, userid) => {
+    return new Promise(async (resolve, reject) => {
+        if (!oldName || !oldName.trim()) {
+            reject('Old project name can not be null or empty')
+            return
+        }
+
+        if (!newName || !newName.trim()) {
+            reject('New project name can not be null or empty')
+            return
+        }
+        
+        if (!projectExists(userid, oldName)) {
+            reject(`Project with name ${oldName} from user ${userid} does not exist`)
+            return
+        }
+
+        if (projectExists(userid, newName)) {
+            reject(`Project with name ${newName} from user ${userid} already`)
+            return
+        }
+
+
+        const project = model.getProject(oldName, userid)
+        project.name = newName
+        
+        
+        model.updateProject(oldName, project, userid).then(updated => {
+            if (updated) {
+                resolve(model.getUserProjects(userid))
+            }
+        }).catch(e => {
+            reject(e)
+        })
+        
+    })
+}
+
 module.exports = {
     createProject,
     getUserProjects,
     addTodo,
     updateTodoStatus,
-    deleteProject
+    deleteProject,
+    updateProjectName
 }
