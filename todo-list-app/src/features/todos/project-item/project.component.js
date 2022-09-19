@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { CustomButton } from "../../ui/custom-button/custom-button.component";
-import { CustomCheckbox } from "../../ui/custom-checkbox/custom-checkbox.component";
 import { CustomInput } from "../../ui/custom-input/custom-input.component";
 import { addTodo, updateTodoStatus } from "../project.service";
-import { TodoItem } from "./todo-list/todo-item.component";
 import { TodoList } from "./todo-list/todo-list.component";
 
 export const Project = ({project}) => {
@@ -33,10 +31,16 @@ export const Project = ({project}) => {
         <span>{project.name}</span>
       </div>
       <div className="project-item-body">
-        <span className="simple-title">To Do</span>
-        <TodoList todoList={todoList.filter(todo => !todo.done)} onChangeTodoStatus={onChangeTodoStatus}/>
-        <span className="simple-title">Done</span>
-        <TodoList todoList={todoList.filter(todo => todo.done)} onChangeTodoStatus={onChangeTodoStatus}/>
+        <TodoList 
+          title="To Do"
+          todoList={todoList.filter(todo => !todo.done)} 
+          onChangeTodoStatus={onChangeTodoStatus}
+        />
+        <TodoList 
+          title="Done"
+          todoList={todoList.filter(todo => todo.done)} 
+          onChangeTodoStatus={onChangeTodoStatus}
+        />
         <span className="separator" />
         <div className="project-item-add-wrapper">
             <CustomInput 
