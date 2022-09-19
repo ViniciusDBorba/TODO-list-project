@@ -114,6 +114,11 @@
 .project-todo-item span {
     margin: 0;
     padding-right: 5px;
+    color: #8786c9;
+}
+
+.project-todo-item.done span  {
+    color: black;
 }
 
 .project-todo-item .action-icon {
