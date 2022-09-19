@@ -21,6 +21,10 @@ export const updateTodoStatus = (ended, todoDescription, projectName) => {
     return api.put("/updateTodoStatus", {ended, todoDescription, projectName})
 }
 
+export const deleteTodo = (todoDescription, projectName) => {
+    return api.delete("/deleteTodo", {todoDescription, projectName})
+}
+
 export const updateProjectName = (oldName, newName) => {
     return api.put("/updateProjectName", {oldName, newName})
 }

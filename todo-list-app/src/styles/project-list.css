@@ -63,6 +63,21 @@
 .project-todo-item {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-todo-item span {
+    margin: 0;
+    padding-right: 5px;
+}
+
+.project-todo-item .action-icon {
+    display: none;
+}
+
+.project-todo-item:hover .action-icon {
+    display: flex;
 }
 
 .project-item-add-wrapper {

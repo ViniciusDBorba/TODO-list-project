@@ -53,6 +53,17 @@ router.put('/updateTodoStatus', (req, res, next) => {
   })
 });
 
+router.delete('/deleteTodo', (req, res, next) => {
+  const { todoDescription, projectName } = req.query
+  
+  service.deleteProjectTodo(todoDescription, projectName, req.session.userid).then(todoList => {
+    res.send(todoList)
+  }).catch(e => {
+    res.status(400).send(e)
+  })
+});
+
+
 router.put('/updateProjectName', (req, res, next) => {
   const { oldName, newName } = req.body
   

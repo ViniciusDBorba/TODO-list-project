@@ -1,0 +1,7 @@
+.custom-checkbox {
+    margin-top: 6px;
+}
+
+.custom-checkbox:hover {
+    cursor: pointer;
+}

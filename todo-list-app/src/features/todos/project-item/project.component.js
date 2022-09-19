@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CustomButton } from "../../ui/custom-button/custom-button.component";
 import { CustomInput } from "../../ui/custom-input/custom-input.component";
-import { addTodo, updateTodoStatus } from "../project.service";
+import { addTodo, updateTodoStatus, deleteTodo } from "../project.service";
 import { TodoList } from "./todo-list/todo-list.component";
 import { ProjectItemHeader } from "./project-item-header.component";
 
@@ -29,6 +29,12 @@ export const Project = ({project, deleteProjectEvent, saveNewNameEvent}) => {
     })
   }
 
+  const onDeleteTodo = (todoDescription) => {
+    deleteTodo(todoDescription, project.name).then(res => {
+      setTodoList(res.data)
+    })
+  }
+
   const onChangeTodoDescription = (value) => {
     setErrorMessage("")
     setTodoDescription(value)
@@ -52,11 +58,13 @@ export const Project = ({project, deleteProjectEvent, saveNewNameEvent}) => {
         <TodoList 
           title="To Do"
           todoList={todoList.filter(todo => !todo.done)} 
+          deleteTodoEvent={onDeleteTodo}
           onChangeTodoStatus={onChangeTodoStatus}
         />
         <TodoList 
           title="Done"
           todoList={todoList.filter(todo => todo.done)} 
+          deleteTodoEvent={onDeleteTodo}
           onChangeTodoStatus={onChangeTodoStatus}
         />
         <span className="separator" />
