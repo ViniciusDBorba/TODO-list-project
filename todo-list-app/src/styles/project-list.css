@@ -87,7 +87,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .project-todo-item input {
@@ -112,6 +112,7 @@
 }
 
 .project-todo-item span {
+    line-break: anywhere;
     margin: 0;
     padding-right: 5px;
     color: #8786c9;
