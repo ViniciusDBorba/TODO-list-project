@@ -1,4 +1,4 @@
-const { createUser } = require('../services/user-service')
+const { createUser } = require('../services/user.service')
 
 jest.mock('express-validator')
 
