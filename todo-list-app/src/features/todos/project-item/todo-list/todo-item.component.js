@@ -27,6 +27,7 @@ export const TodoItem = ({todo, onChangeStatus, deleteEvent, saveTodoDescription
         if (editing) {
             return (
                 <div className={`project-todo-item ${className}`}>
+                    <CustomCheckbox checked={todo.done} onChange={onChangeTodoStatus}/>
                     <CustomInput
                         name="new todo description"
                         value={newDescription}

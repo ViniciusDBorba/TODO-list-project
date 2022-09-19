@@ -42,6 +42,26 @@
     box-shadow: 1px 1px 1px 1px #c7c7c7;
 }
 
+.project-item-header input {
+    border: 0px;
+    border-style: solid;
+    border-color: #b1b1b1;
+    border-bottom-width: 1px;
+
+    padding: 5px;
+    padding-top: 8px;
+    padding-bottom: 2px;
+    background-color: #efefef;
+}
+
+.project-item-header input:focus {
+    outline: 0px;
+    border: 0px;
+    border-style: solid;
+    border-color: black;
+    border-bottom-width: 1px;
+}
+
 .project-item-header div {
     display: flex;
     flex-direction: row;
@@ -63,10 +83,32 @@
 }
 
 .project-todo-item {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.project-todo-item input {
+    border: 0px;
+    border-style: solid;
+    border-color: #b1b1b1;
+    border-bottom-width: 1px;
+
+    padding: 5px;
+    padding-top: 8px;
+    padding-bottom: 2px;
+    background-color: white;
+    box-shadow: 0px 0px 0px;
+}
+
+.project-todo-item input:focus {
+    outline: 0px;
+    border: 0px;
+    border-style: solid;
+    border-color: black;
+    border-bottom-width: 1px;
 }
 
 .project-todo-item span {

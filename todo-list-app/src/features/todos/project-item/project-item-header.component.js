@@ -18,7 +18,7 @@ export const ProjectItemHeader = ({projectName, saveAction, deleteProjectEvent})
 
   const renderEditInput = () => {
     if (editing) {
-      return (<CustomInput 
+      return (<CustomInput
         name="new project name" 
         needLabel={false}
         value={newName} 
