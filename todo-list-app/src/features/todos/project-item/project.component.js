@@ -27,7 +27,7 @@ export const Project = ({project, deleteProjectEvent}) => {
   }
 
   return (
-    <div key={project.name} className="project-item">
+    <div className="project-item">
       <div className="project-item-header">
         <span>{project.name}</span>
         <div>

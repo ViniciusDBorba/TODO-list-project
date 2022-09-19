@@ -23,7 +23,6 @@ export const LoginCard = () => {
         getUser().then(res => {
             if (res.status === 200) {
                 setUser(res.data)
-                //navigate('/')
             }
         })
     }
@@ -69,7 +68,7 @@ export const LoginCard = () => {
 
     const renderErrorMessage = () => {
         if (errorMessage) {
-            return (<p className='login-error-message' data-testid={`login-error-message`}>{errorMessage}</p>)
+            return (<p className='card-error-message' data-testid={`login-error-message`}>{errorMessage}</p>)
         }
     }
 

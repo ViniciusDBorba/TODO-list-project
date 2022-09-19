@@ -8,6 +8,7 @@ export const TodoList = ({title, todoList, onChangeTodoStatus}) => {
           {
             todoList.map(todo => (
               <TodoItem 
+                key={todo.description}
                 description={todo.description} 
                 checked={todo.done} 
                 onChangeStatus={onChangeTodoStatus} 

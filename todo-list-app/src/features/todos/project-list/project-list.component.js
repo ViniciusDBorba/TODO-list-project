@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NewProjectCard } from './new-project-card.component';
 import { Project } from '../project-item/project.component';
-import { createProject, getProjects, deleteProject } from '../project.service';
+import { getProjects, deleteProject } from '../project.service';
 import '../../../styles/project-list.css'
 
 export const ProjectList = () => {
@@ -15,15 +15,10 @@ export const ProjectList = () => {
         })
     }, [])
 
-    const onAddProject = (projectName) => {
-        createProject(projectName).then(res => {
-            const project = res.data
-            const pList = projectList.map(p => p)
-            pList.push(project)
-            setProjectList(pList)
-        }).catch(e => {
-            console.log(e)
-        })
+    const onAddProject = (project) => {
+        const pList = projectList.map(p => p)
+        pList.push(project)
+        setProjectList(pList)
     }
 
     const onDeleteProject = (projectName) => {
@@ -38,9 +33,13 @@ export const ProjectList = () => {
     return (
         <div className='project-list'>
             {projectList.map(project => (
-                <Project project={project} deleteProjectEvent={onDeleteProject}/>
+                <Project 
+                    key={project.name}
+                    project={project} 
+                    deleteProjectEvent={onDeleteProject}
+                />
             ))}
-            <NewProjectCard onClickAddProject={onAddProject}/>
+            <NewProjectCard onAddProject={onAddProject}/>
         </div>
       );
 };

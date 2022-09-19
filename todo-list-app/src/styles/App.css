@@ -52,3 +52,13 @@
 .action-icon:hover {
   cursor: pointer;
 }
+
+.card-error-message {
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+  color: red;
+  padding-top: 10px;
+  margin: 0;
+  max-width: fit-content;
+}

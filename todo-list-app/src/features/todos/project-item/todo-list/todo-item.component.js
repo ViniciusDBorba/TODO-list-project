@@ -7,7 +7,7 @@ export const TodoItem = ({description, checked, onChangeStatus, className}) => {
   }
 
   return (
-        <div key={`${description}${checked ? "-done" : ""}`} className={`project-todo-item ${className}`}>
+        <div className={`project-todo-item ${className}`}>
             <CustomCheckbox checked={checked} onChange={onChangeTodoStatus}/>
             <span>{description}</span>
         </div>

@@ -8,7 +8,7 @@ const createProject = (projectName, userid) => {
         }
         
         if (projectExists(userid, projectName)) {
-            reject(`Project with name ${projectName} from user ${userid} awready exist`)
+            reject(`Project with name ${projectName} from user ${userid} already exist`)
             return
         }
 
@@ -79,7 +79,7 @@ const addTodo = (todoDescription, projectName, userid) => {
         const findedTodos = project.todos.filter(t => t.description === todoDescription)
 
         if (findedTodos && findedTodos.length > 0) {
-            reject(`Todo with description ${todoDescription} alwready exist`)
+            reject(`Todo with description ${todoDescription} already exist`)
             return
         }
         const todo = {
