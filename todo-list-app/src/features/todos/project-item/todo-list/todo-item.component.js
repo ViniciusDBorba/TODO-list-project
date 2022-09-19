@@ -23,6 +23,18 @@ export const TodoItem = ({todo, onChangeStatus, deleteEvent, saveTodoDescription
         setNewDescription("")
     }
 
+    const renderTooltip = () => {
+        if (todo.doneDate) {
+            return (
+                <span className="tooltip">Done: {todo.doneDate}</span>
+            )
+        } else if (todo.addDate) {
+            return (
+                <span className="tooltip">Add: {todo.addDate}</span>
+            )
+        }
+    }
+
     const renderEditLayout = () => {
         if (editing) {
             return (
@@ -46,6 +58,7 @@ export const TodoItem = ({todo, onChangeStatus, deleteEvent, saveTodoDescription
                     <span>{todo.description}</span>
                     <RiEdit2Line className="action-icon" onClick={onClickEdit}/>
                     <RiDeleteBin2Line className="action-icon" onClick={onClickDeleteTodo}/>
+                    {renderTooltip()}
                 </div>
             )
         }

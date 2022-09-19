@@ -84,9 +84,12 @@ const addTodo = (todoDescription, projectName, userid) => {
             reject(`Todo with description ${todoDescription} already exist`)
             return
         }
+        const date = new Date()
+        const stringDate = `${date.toLocaleString()}`
         const todo = {
             description: todoDescription,
-            done: false
+            done: false,
+            addDate: stringDate
         }
 
         project.todos.push(todo)
@@ -123,7 +126,9 @@ const updateTodoStatus = (ended, todoDescription, projectName, userid) => {
 
         project.todos = project.todos.map(todo => {
             if (todo.description === todoDescription) {
-                return {...todo, done: ended}
+                const date = new Date()
+                const stringDate = `${date.toLocaleString()}`
+                return {...todo, done: ended, doneDate: ended ? stringDate : null}
             }
 
             return todo
