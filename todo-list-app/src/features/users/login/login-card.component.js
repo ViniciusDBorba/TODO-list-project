@@ -73,19 +73,34 @@ export const LoginCard = () => {
     }
 
     return (
-        <SimpleCard title="Login" testid="login-card">
+        <SimpleCard title="Login" testid="login-card" className="big-card">
             <form data-testid="login-form" onSubmit={onSubmit}>
                 {renderErrorMessage()}
-                <CustomInput name="email" value={email} setter={setEmail} required/>
-                <CustomInput name="password" value={password} setter={setPassword} secret required/>
+                <CustomInput 
+                    name="email" 
+                    className='max-size-input'
+                    value={email} 
+                    setter={setEmail} 
+                    require
+                />
+                <CustomInput 
+                    name="password" 
+                    className='max-size-input'
+                    value={password} 
+                    setter={setPassword} 
+                    secret 
+                    required
+                />
                 <div className="form-actions-wrapper">
                     <CustomButton 
                         primary={false}
+                        className='small-button'
                         text="Register"
                         onClick={onClickRegister}
                         testid="registerBt"
                     />
                     <CustomButton
+                        className='small-button'
                         testid="loginBt"
                         text="Submit"
                     />

@@ -1,0 +1,10 @@
+.custom-buttom {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+
+.custom-buttom.primary {
+
+}

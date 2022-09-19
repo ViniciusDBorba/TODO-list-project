@@ -91,8 +91,14 @@ export const Project = ({project, deleteProjectEvent, saveNewNameEvent}) => {
               needLabel={false}
               value={todoDescription} 
               setter={onChangeTodoDescription}
+              className="add-todo-input"
             />
-            <CustomButton testid={`${project.name}-add-todo-button`} text="Add" onClick={onClickAddTodo}/>
+            <CustomButton 
+              testid={`${project.name}-add-todo-button`} 
+              text="Add" 
+              onClick={onClickAddTodo}
+              className="small-button"
+            />
         </div>
       </div>
       

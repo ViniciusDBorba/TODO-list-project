@@ -24,11 +24,12 @@
 .project-item {
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 400px;
     margin-right: 10px;
     margin-bottom: 10px;
     border: 1px solid #efefef;
     border-radius: 5px;
+    box-shadow: 3px 3px 5px #c7c7c7;
 }
 
 .project-item-header {
@@ -38,6 +39,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: #efefef;
+    box-shadow: 1px 1px 1px 1px #c7c7c7;
 }
 
 .project-item-header div {
@@ -78,6 +80,12 @@
 
 .project-todo-item:hover .action-icon {
     display: flex;
+}
+
+
+.add-todo-input {
+    width: 100%;
+    padding-right: 20px;
 }
 
 .project-item-add-wrapper {

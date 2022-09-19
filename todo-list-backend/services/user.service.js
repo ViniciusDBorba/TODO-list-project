@@ -14,6 +14,10 @@ const createUser = (user) => {
             reject('User password can not be null or empty')
             return
         }
+        if (model.getUser(user.email)) {
+            reject(`User with email ${user.email} already exist`)
+            return
+        }
 
         model.saveUser(user)
         .then(email => {

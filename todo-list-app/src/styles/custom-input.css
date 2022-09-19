@@ -1,3 +1,11 @@
+.custom-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow:inset 0 0 2px 2px #efefef;
+    border: 1px solid #b1b1b1
+} 
+
 .input-group {
     display: flex;
     flex-direction: column;

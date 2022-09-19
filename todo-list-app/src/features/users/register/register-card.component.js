@@ -100,20 +100,44 @@ export const RegisterCard = ({onResponse}) => {
     }
 
     return (
-        <SimpleCard title="Register" testid="register-card">
+        <SimpleCard title="Register" testid="register-card" className="big-card">
             <form data-testid="register-form" onSubmit={onSubmit}>
-                <CustomInput name="name" value={name} setter={onChangeName} errorMessage={invalidName ? "Invalid name" : ""} required/>
-                <CustomInput name="email" value={email} setter={onChangeEmail} errorMessage={invalidEmail ? "Invalid email" : ""} required/>
-                <CustomInput name="password" value={password} setter={onChangePassword} errorMessage={invalidPassword ? "Invalid password" : ""} secret required/>
+                <CustomInput 
+                    name="name" 
+                    className='max-size-input'
+                    value={name} 
+                    setter={onChangeName} 
+                    errorMessage={invalidName ? "Invalid name" : ""} 
+                    required
+                />
+                <CustomInput 
+                    name="email" 
+                    className='max-size-input' 
+                    value={email} 
+                    setter={onChangeEmail} 
+                    errorMessage={invalidEmail ? "Invalid email" : ""} 
+                    required
+                />
+                <CustomInput 
+                    name="password" 
+                    className='max-size-input'
+                    value={password} 
+                    setter={onChangePassword} 
+                    errorMessage={invalidPassword ? "Invalid password" : ""} 
+                    secret 
+                    required
+                />
                 <div className="form-actions-wrapper">
                     <CustomButton 
                         testid="cancelBt"
+                        className='small-button'
                         primary={false}
                         text="Cancel"
                         onClick={onCancel}
                     />
                     <CustomButton
                         testid="registerBt"
+                        className='small-button'
                         text="Submit"
                     />
                 </div>

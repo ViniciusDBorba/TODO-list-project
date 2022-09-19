@@ -17,11 +17,11 @@ export const CustomInput = ({name, value, setter, errorMessage = "",  needLabel 
     }
 
     return (
-        <div className={`input-group ${needLabel ? "" : "no-label" }`}>
+        <div className={`input-group ${needLabel ? "" : "no-label" } ${className}`}>
             {renderLabel()}
             <input 
                 type={secret ? "password" : "text"} 
-                className={`custom-input ${className}`}
+                className={`custom-input`}
                 id={name} 
                 name={name}
                 data-testid={name}
