@@ -3,8 +3,21 @@
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 5px;
+    color: white;
+    background-color: #8786c9;
+    border: 0px;
+    box-shadow:inset 0px -3px 7px 1px #7c7c7c;
+}
+
+.custom-buttom:hover {
+    cursor: pointer;
+    box-shadow:inset 0px 0px 7px 3px #7c7c7c;
+}
+
+.custom-buttom:active {
+    box-shadow:inset 0px 0px 5px 8px #7c7c7c;
 }
 
 .custom-buttom.primary {
-
+    background-color: #89b680;
 }
