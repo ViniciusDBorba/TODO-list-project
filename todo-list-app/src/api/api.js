@@ -8,6 +8,7 @@ export default class Api {
 
     init = () => {
         let headers = {
+            "Content-Type": "application/json",
             Accept: "application/json",
         };
 
@@ -22,10 +23,14 @@ export default class Api {
     }
 
     get = (path, params) => {
-        return this.init().get(path, {params, withCredentials: true})
+        return this.init().get(path, {params})
     }
 
     post = (path, data) => {
-        return this.init().post(path, data, {withCredentials: true})
+        return this.init().post(path, data)
+    }
+
+    put = (path, data) => {
+        return this.init().put(path, data)
     }
 }

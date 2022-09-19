@@ -8,3 +8,7 @@
     text-transform: capitalize;
     margin-bottom: 5px;
 }
+
+.input-group.no-label {
+    margin: 0;
+}

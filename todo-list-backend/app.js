@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const projectsRouter = require('./routes/projects');
 const sessionService = require('./services/session.service')
 
 const app = express();
@@ -27,21 +28,21 @@ app.use(sessions({
         maxAge: oneDay,
         secure: false,
         httpOnly:true,
-        sameSite: true
+        sameSite: 'lax'
     }
 }));
 app.use((req, res, next) => {
     console.log(req.path)
     res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ALLOW_ORIGIN);
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type, Accept, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin,Cache-Control,X-Access-Token,X-Requested-With,Content-Type, Accept, Authorization,Access-Control-Request-Method');
     res.setHeader('Access-Control-Allow-Credentials', true);
     if (req.path.includes('login') || req.path.includes('register')) {
         next();
         return
     } 
 
-    if (!sessionService.sessionExists(req.session.userid)) {
+    if (req.method !== "OPTIONS" && !sessionService.sessionExists(req.session.userid)) {
         res.status(401).send('Unauthorized')
         return
     }
@@ -51,5 +52,6 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/projects', projectsRouter)
 
 module.exports = app;

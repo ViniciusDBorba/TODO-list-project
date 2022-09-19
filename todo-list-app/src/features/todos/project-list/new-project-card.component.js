@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CustomButton } from '../../ui/custom-button/custom-button.component';
 import { CustomInput } from '../../ui/custom-input/custom-input.component';
 import { SimpleCard } from '../../ui/simple-card/simple-card.component';
 
-export const NewProjectCard = () => {
+export const NewProjectCard = ({onClickAddProject}) => {
     const [projectName, setProjectName] = useState("")
 
-    const onClickAdProject = () => {
-
+    const addProjectAction = () => {
+        setProjectName("")
+        onClickAddProject(projectName)
     }
 
     return (
@@ -25,7 +26,7 @@ export const NewProjectCard = () => {
                     className='create-project-button'
                     text="Create project" 
                     primary={false} 
-                    onClick={onClickAdProject}
+                    onClick={addProjectAction}
                 />
             </div>
         </SimpleCard>

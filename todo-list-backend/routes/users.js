@@ -2,7 +2,7 @@ const express = require('express');
 const service = require('../services/user.service')
 const sessionService = require('../services/session.service')
 const router = express.Router();
-const { body } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 
 router.get('/', (req, res, next) => {  
   const session = req.session
@@ -42,7 +42,7 @@ router.post('/register', body('email').isEmail(), (req, res, next) => {
     return res.status(400).send("Invalid email!")
   }
 
-  service.createUser(req)
+  service.createUser(req.body)
   .then(savedEmail => {
     res.send(`User with email ${savedEmail} registered`)
   })

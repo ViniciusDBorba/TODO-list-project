@@ -37,3 +37,10 @@
 .simple-text {
   font-size: medium;
 }
+
+.separator {
+  width: 100%;
+  border: 1px solid #efefef;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
